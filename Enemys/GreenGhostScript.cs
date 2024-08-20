@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class GreenGhostScript : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class GreenGhostScript : MonoBehaviour
         
     private NavMeshAgent agent;
     private GameManager gameManager;
-
+    private ScoreManager scoreManager;
 
     void Start()
     {
@@ -32,6 +33,15 @@ public class GreenGhostScript : MonoBehaviour
             }
         }
     }
+    public void DamageTaken()
+    {
+        scoreManager.IncrementScore();
+        Vector3 randomPosition = GetRandomPositionOnNavMesh();
+        agent.Warp(randomPosition);
+
+
+
+    }
 
     void SetNewDestination()
     {
@@ -53,12 +63,7 @@ public class GreenGhostScript : MonoBehaviour
         return navHit.position;
     }
 
-    public void DamageTaken()
-    {
-        Vector3 randomPosition = GetRandomPositionOnNavMesh();
-        agent.Warp(randomPosition);
-
-    }
+    
     Vector3 GetRandomPositionOnNavMesh()
     {
         NavMeshHit hit;

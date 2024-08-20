@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class PacManScript : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PacManScript : MonoBehaviour
     public Transform fleeArea;
     public NavMeshAgent agent;
     private GameManager gameManager;
-
+    private ScoreManager scoreManager;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -33,10 +34,12 @@ public class PacManScript : MonoBehaviour
    
     public void DamageTaken()
     {
+        scoreManager.IncrementScore();
         Vector3 randomPosition = GetRandomPositionOnNavMesh();
         agent.Warp(randomPosition);
 
     }
+    
     Vector3 GetRandomPositionOnNavMesh()
     {
         NavMeshHit hit;
