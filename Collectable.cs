@@ -1,25 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class Collectable : MonoBehaviour
-{/*
-    FirstPersonController firstPersonController;
+{
     private void Start()
     {
-        firstPersonController = FindAnyObjectByType<FirstPersonController>();
+        // Eventuele initiële setup
     }
+
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Trigger entered: " + other.gameObject.name);
         Inventory inventory = other.GetComponent<Inventory>();
 
-        if(inventory != null)
+        if (inventory != null)
         {
-            Debug.Log("collected");
+            Debug.Log("Inventory found. Collecting diamond.");
             inventory.DiamondCollected();
             gameObject.SetActive(false);
-            firstPersonController.m_MyAudioSource.Play();
         }
-    }*/
+        else
+        {
+            Debug.Log("No Inventory component found on the object.");
+        }
+    }
 }

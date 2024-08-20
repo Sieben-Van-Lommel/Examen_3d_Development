@@ -22,17 +22,24 @@ public class ScoreManager : MonoBehaviour
         }
 
         highScore = PlayerPrefs.GetInt("HighScore", 0);
+
         if (_highScore != null)
         {
             _highScore.text = highScore.ToString();
         }
+        else
+        {
+            Debug.LogError("_highScore TextMeshProUGUI is not assigned.");
+        }
+
         inventoryUI = FindObjectOfType<InventoryUI>();
 
-        highScore = PlayerPrefs.GetInt("HighScore", 0);
-        _highScore.text = highScore.ToString();
-
-        
+        if (inventoryUI == null)
+        {
+            Debug.LogError("InventoryUI reference is missing.");
+        }
     }
+
 
     // Update is called once per frame
     void Update()
@@ -58,5 +65,6 @@ public class ScoreManager : MonoBehaviour
     public void UpdateGold()
     {
         inventoryUI.UpdateGoldText(inventory);
+        Debug.Log("updategold calles");
     }
 }

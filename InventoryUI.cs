@@ -1,21 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
+    public TextMeshProUGUI goldText;
 
-    private TextMeshProUGUI goldText;
-    // Start is called before the first frame update
     void Start()
     {
-        goldText = GetComponent<TextMeshProUGUI>();
+        if (goldText == null)
+        {
+            goldText = GetComponent<TextMeshProUGUI>();
+        }
     }
 
     public void UpdateGoldText(Inventory inventory)
     {
-        goldText.text = inventory.NumberOfDiamonds.ToString();
-        
+        if (goldText != null)
+        {
+            goldText.text = inventory.NumberOfDiamonds.ToString();
+        }
+        else
+        {
+            Debug.LogError("goldText is not assigned.");
+        }
     }
 }
