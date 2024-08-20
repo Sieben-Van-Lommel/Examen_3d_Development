@@ -154,9 +154,7 @@ public class GameManager : MonoBehaviour
         _currentScore.text = inventory.NumberOfDiamonds.ToString();
     }*/
 
-    //inventory
-    public static InventoryUI inventoryUI;
-    public static Inventory inventory;
+   
     //menu
     public GameObject pauseMenu;
     public GameObject optionsMenu;
@@ -180,14 +178,13 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //scoremanager
-        inventoryUI = FindObjectOfType<InventoryUI>();
+        
 
         highScore = PlayerPrefs.GetInt("HighScore", 0);
         _highScore.text = highScore.ToString();
 
-        //Scoremanager
-        inventory = FindObjectOfType<Inventory>();
+     
+        
 
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);
@@ -214,22 +211,11 @@ public class GameManager : MonoBehaviour
     }
     public void LoadPlayer()
     {
-
+        saveLoadManager.Load();
     }
     //scoremanager aanroepen
-    public void HighScore()
-    {
-        scoreManager._HighScore();
-    }
-    public void CurrentScore()
-    {
-        scoreManager._CurrentScore();
-    }
-    public void UpdateGold()
-    {
-        inventoryUI.UpdateGoldText(inventory);
-    }
-    //GameMenuManager aanroepen
+
+   
     public void ResumeGame()
     {
         gameMenuManager.Resume();
@@ -250,4 +236,16 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         Debug.Log("Endscreen activated.");
     }
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("StartMenu");
+
+    }
+
+    public void LoadScene1()
+    {
+        SceneManager.LoadScene("SampleScene");
+        Time.timeScale = 1f;
+    }
+
 }  

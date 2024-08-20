@@ -8,11 +8,13 @@ public class SaveLoadManager : MonoBehaviour
     GameManager gameManager;
     public Transform player;
     Vector3 playerPosition;
+    ScoreManager scoreManager;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        scoreManager = FindAnyObjectByType<ScoreManager>();
     }
 
     // Update is called once per frame
@@ -22,8 +24,8 @@ public class SaveLoadManager : MonoBehaviour
     }
     public void Save() 
     {
-        PlayerPrefs.SetInt("coins", inventory.NumberOfDiamonds);
-
+        PlayerPrefs.SetInt("score", scoreManager.GetScore());
+        Debug.Log("Saving");
         playerPosition = player.position;
         PlayerPrefs.SetFloat("playerPositionX", playerPosition.x);
         PlayerPrefs.SetFloat("playerPositionY", playerPosition.y);
@@ -31,8 +33,9 @@ public class SaveLoadManager : MonoBehaviour
     }
     public void Load() 
     {
-
-        inventory.NumberOfDiamonds = PlayerPrefs.GetInt("coins");
+        Debug.Log("loading");
+        int score = PlayerPrefs.GetInt("score", 0); // Standaard waarde 0
+        scoreManager.SetScore(score); // Werk de score bij
 
         player.position = new Vector3(PlayerPrefs.GetFloat("playerPositionX"), PlayerPrefs.GetFloat("playerPositionY"), PlayerPrefs.GetFloat("playerPositionZ"));
         Time.timeScale = 1f;

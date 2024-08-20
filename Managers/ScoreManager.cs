@@ -5,66 +5,38 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    public TextMeshProUGUI _highScore;
-    public TextMeshProUGUI _currentScore;
-    private Inventory inventory;
-    public static InventoryUI inventoryUI;
+    public TextMeshProUGUI scoreText;  // Sleep hier je TextMeshProUGUI component in via de Inspector
 
-    private int highScore;
+    protected int score;
 
     void Start()
     {
-        inventory = FindObjectOfType<Inventory>();
-
-        if (inventory == null)
-        {
-            Debug.LogError("Inventory reference is missing.");
-        }
-
-        highScore = PlayerPrefs.GetInt("HighScore", 0);
-
-        if (_highScore != null)
-        {
-            _highScore.text = highScore.ToString();
-        }
-        else
-        {
-            Debug.LogError("_highScore TextMeshProUGUI is not assigned.");
-        }
-
-        inventoryUI = FindObjectOfType<InventoryUI>();
-
-        if (inventoryUI == null)
-        {
-            Debug.LogError("InventoryUI reference is missing.");
-        }
+        // Begin met een score van 0
+        score = 0;
+        IncrementScore();
     }
 
-
-    // Update is called once per frame
-    void Update()
+    public void IncrementScore()
     {
+        // Verhoog de score met 1
+        score = score + 1;
+        Debug.Log("log3");
         
+        
+            Debug.Log("log4");
+            scoreText.text = "Score: " + score;
+
+    }
+    public int GetScore()
+    {
+        return score;
     }
 
-    public void _HighScore()
+    // Methode om de score in te stellen
+    public void SetScore(int newScore)
     {
-        int currentScore = inventory.NumberOfDiamonds;
-        if (currentScore > highScore)
-        {
-            highScore = currentScore;
-            PlayerPrefs.SetInt("HighScore", highScore);
-            _highScore.text = highScore.ToString();
+        score = newScore;
+        IncrementScore();
+    }
 
-        }
-    }
-    public void _CurrentScore()
-    {
-        _currentScore.text = inventory.NumberOfDiamonds.ToString();
-    }
-    public void UpdateGold()
-    {
-        inventoryUI.UpdateGoldText(inventory);
-        Debug.Log("updategold calles");
-    }
 }

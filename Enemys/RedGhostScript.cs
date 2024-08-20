@@ -8,10 +8,19 @@ public class RedGhostScript : MonoBehaviour
     public Transform player;
     public NavMeshAgent agent;
 
+    private ScoreManager scoreManager;
+
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+
+        // Zoek de ScoreManager in de scène
+        scoreManager = FindObjectOfType<ScoreManager>();
+        if (scoreManager == null)
+        {
+            Debug.LogError("ScoreManager not found. Make sure there is a ScoreManager in the scene.");
+        }
     }
 
     // Update is called once per frame
@@ -25,13 +34,29 @@ public class RedGhostScript : MonoBehaviour
 
     public void DamageTaken()
     {
+        scoreManager.IncrementScore();
         Vector3 randomPosition = GetRandomPositionOnNavMesh();
         agent.Warp(randomPosition);
 
-        // Ensure the GameManager instance is available and update gold
-        if (GameManager.Instance != null)
+
+       
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        // Controleer of het object een schot is (je kunt dit aanpassen op basis van je project)
+        if (collision.gameObject.CompareTag("Bullet"))
         {
-            GameManager.Instance.UpdateGold();
+            Debug.Log("log1");
+            // Verhoog de teller via de ScoreManager
+            if (scoreManager != null)
+            {
+                Debug.Log("log2");
+                scoreManager.IncrementScore();
+
+            }
+
+            // Verwijder of deactiveer het doelwit na een hit, als dat gewenst is
+            Destroy(gameObject);
         }
     }
 

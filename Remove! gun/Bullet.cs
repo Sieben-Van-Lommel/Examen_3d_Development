@@ -27,17 +27,17 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("RedGhost"))
         {
             redGhostScript.DamageTaken();
-            GameManager.Instance.UpdateGold();
+            
         }
         else if (collision.gameObject.CompareTag("GreenGhost"))
         {
             greenGhostScript.DamageTaken();
-            GameManager.Instance.UpdateGold();
+            
         }
         else if (collision.gameObject.CompareTag("PacMan"))
         {
             pacManScript.DamageTaken();
-            GameManager.Instance.UpdateGold();
+            
         }
     }
 }

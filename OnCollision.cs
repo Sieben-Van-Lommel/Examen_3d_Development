@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class OnCollision : MonoBehaviour
 {
+    
     GameManager gameManager;
 
     GameObject gameObjectToDeactivate;
@@ -58,8 +59,8 @@ public class OnCollision : MonoBehaviour
                 // Roep de methodes aan van GameManager
                 if (gameManager != null)
                 {
-                    gameManager.HighScore();
-                    gameManager.CurrentScore();
+                   // gameManager.HighScore();
+                   // gameManager.CurrentScore();
                 }
                 else
                 {

@@ -44,8 +44,8 @@ public class Damage : MonoBehaviour
                 gameManager.Dead();
                 gameObjectToDeactivate.SetActive(true);
             }
-            gameManager.HighScore();
-            gameManager.CurrentScore();
+            //gameManager.HighScore();
+            //gameManager.CurrentScore();
         }
     }
 
