@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class Collectable : MonoBehaviour
-{
+{/*
     FirstPersonController firstPersonController;
     private void Start()
     {
@@ -20,5 +21,5 @@ public class Collectable : MonoBehaviour
             gameObject.SetActive(false);
             firstPersonController.m_MyAudioSource.Play();
         }
-    }
+    }*/
 }

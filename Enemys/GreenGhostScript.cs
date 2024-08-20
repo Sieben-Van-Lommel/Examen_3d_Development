@@ -10,6 +10,7 @@ public class GreenGhostScript : MonoBehaviour
     private NavMeshAgent agent;
     private GameManager gameManager;
 
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
